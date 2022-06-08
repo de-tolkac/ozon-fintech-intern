@@ -15,8 +15,11 @@ type PostgreSQL struct {
 }
 
 func (db *PostgreSQL) Init() (err error) {
-	connStr := fmt.Sprintf("postgres://%s:%s@localhost/%s?sslmode=disable",
-		os.Getenv("POSTGRESQL_USER"), os.Getenv("POSTGRESQL_PASSWORD"),
+	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
+		os.Getenv("POSTGRESQL_USER"), 
+		os.Getenv("POSTGRESQL_PASSWORD"),
+		os.Getenv("POSTGRESQL_HOST"),
+		os.Getenv("POSTGRESQL_PORT"),
 		os.Getenv("POSTGRESQL_DB_NAME"))
 
 	db.connection, err = sql.Open("postgres", connStr)
