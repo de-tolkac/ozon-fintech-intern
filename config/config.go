@@ -34,6 +34,6 @@ func (cfg *Config) Init() {
 
 	err = cfg.Storage.Init()
 	if err != nil {
-		panic("Error connecting and configuring the database")
+		panic("Error connecting and configuring the database: " + err.Error())
 	}
 }
