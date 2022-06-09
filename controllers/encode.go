@@ -27,7 +27,9 @@ func Encode(cfg *Config) gin.HandlerFunc {
 			return
 		}
 
-		urlString := url.TruncateSlashes(json.Url)
+		// Uncomment if you need to truncate trailing slashes from URL
+		// urlString := url.Truncate(json.Url)
+		urlString := json.Url
 		if !url.Validate(urlString) {
 			// Invalid URL in request
 			c.JSON(http.StatusOK, gin.H{

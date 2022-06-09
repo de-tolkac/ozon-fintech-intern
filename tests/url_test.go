@@ -20,6 +20,7 @@ func TestValidate(t *testing.T) {
 	//assert.Equal(t, false, Validate("http://url."))
 }
 
+/*
 func TestTruncateSlashes(t *testing.T) {
 	assert.Equal(t, "http://url.ru", TruncateSlashes("http://url.ru"))
 	assert.Equal(t, "http://url.ru", TruncateSlashes("http://url.ru/"))
@@ -29,3 +30,4 @@ func TestTruncateSlashes(t *testing.T) {
 	assert.Equal(t, "", TruncateSlashes("/"))
 	assert.Equal(t, "", TruncateSlashes("/////"))
 }
+*/

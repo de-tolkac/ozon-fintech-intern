@@ -7,15 +7,18 @@ func Validate(urlString string) bool {
 	return err == nil
 }
 
-func TruncateSlashes(url string) string {
+/* 
+// Well, smh trailing slash matters for URLs, so we need to disable this function
+func Truncate(url string) string {
 	// First comprassion prevents SEGFAULT when empty string passed
 	if len(url) == 0 || url[len(url)-1] != '/' {
 		return url
 	}
 
 	idx := len(url) - 1
-	for ; idx >= 0 && url[idx] == '/'; idx-- {
+	for ; idx >= 0 && (url[idx] == '/' || url[idx] == ' '); idx-- {
 	} // C-style stuff....
 
 	return url[:idx+1]
 }
+*/
