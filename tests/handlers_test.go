@@ -102,6 +102,7 @@ func TestEncode(t *testing.T) {
 		codeToUrl[res.EncodedUrl] = test.Url
 	}
 
+	/*
 	var sameUrlTests = []encodeTest{
 		{[]byte(`{"url" : "http://ya.ru/"}`), "http://ya.ru", 200, responseEncode{0, "", ""}},
 		{[]byte(`{"url" : "http://ya.ru////"}`), "http://ya.ru", 200, responseEncode{0, "", ""}},
@@ -127,6 +128,7 @@ func TestEncode(t *testing.T) {
 			prevUrl = res.EncodedUrl
 		}
 	}
+	*/
 }
 
 func TestDecode(t *testing.T) {
