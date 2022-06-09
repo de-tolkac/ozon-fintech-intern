@@ -8,8 +8,10 @@ import (
 )
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
+
 	cfg := new(Config)
-	cfg.Init()
+	cfg.Init(".env")
 
 	r := gin.Default()
 

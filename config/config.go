@@ -13,8 +13,8 @@ type Config struct {
 	UrlPrefix string
 }
 
-func (cfg *Config) Init() {
-	err := godotenv.Load()
+func (cfg *Config) Init(envPath string) {
+	err := godotenv.Load(envPath)
 	if err != nil {
 		panic("Missed .env file")
 	}
