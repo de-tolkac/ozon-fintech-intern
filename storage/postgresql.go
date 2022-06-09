@@ -15,6 +15,7 @@ type PostgreSQL struct {
 }
 
 func (db *PostgreSQL) Init() (err error) {
+	// Generate url for PostgreSQL connection
 	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		os.Getenv("POSTGRESQL_USER"), 
 		os.Getenv("POSTGRESQL_PASSWORD"),
@@ -24,6 +25,7 @@ func (db *PostgreSQL) Init() (err error) {
 
 	db.connection, err = sql.Open("postgres", connStr)
 	if err == nil {
+		// We successfully connected to DB, now creating table (if not exists) -- migration of smoker
 		_, err = db.connection.Exec(`CREATE TABLE IF NOT EXISTS url (
 								id serial PRIMARY KEY, 
 								long_url VARCHAR(2048) UNIQUE NOT NULL,
@@ -53,7 +55,6 @@ func (db *PostgreSQL) FindDecodedUrl(code string) (res string, found bool) {
 	return
 }
 
-// TODO: handle error!
 func (db *PostgreSQL) SaveUrl(decodedUrl, encodedUrl string) {
 	db.connection.QueryRow("INSERT INTO url (long_url, short_code) VALUES ($1, $2)", decodedUrl, encodedUrl)
 }

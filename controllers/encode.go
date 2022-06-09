@@ -40,6 +40,7 @@ func Encode(cfg *Config) gin.HandlerFunc {
 			return
 		}
 
+		// Using mutex to prevent data collissions
 		cfg.Storage.Lock()
 		encodedUrl, found := cfg.Storage.FindEncodedUrl(urlString)
 		if !found {
@@ -59,8 +60,8 @@ func Encode(cfg *Config) gin.HandlerFunc {
 		cfg.Storage.Unlock()
 
 		c.JSON(http.StatusOK, gin.H{
-			"encodedUrl": cfg.UrlPrefix + encodedUrl,
-			"code":       0, // OK
+			"encodedUrl": cfg.UrlPrefix + encodedUrl, // eg: http://localhost:8080/RdTAf4u4vH
+			"code":       0, // Success
 			"error":      "",
 		})
 	}

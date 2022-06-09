@@ -16,6 +16,7 @@ func TestValidate(t *testing.T) {
 	assert.Equal(t, false, Validate("url.ru"))
 	assert.Equal(t, false, Validate("url.ru/"))
 	assert.Equal(t, false, Validate(""))
+	// There is something strange with url.ParseRequestURI function
 	//assert.Equal(t, false, Validate("http://.ru"))
 	//assert.Equal(t, false, Validate("http://url."))
 }

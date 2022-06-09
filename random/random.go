@@ -8,6 +8,7 @@ import (
 const alphabet = "0123456789_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 func init() {
+	// We need to seed on each package initialization to avoid repeating random codes
 	rand.Seed(time.Now().UnixNano())
 }
 

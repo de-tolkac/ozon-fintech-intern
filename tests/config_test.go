@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// Global vars for tests package
 var Cfg *Config
 var ConfigInited bool
 

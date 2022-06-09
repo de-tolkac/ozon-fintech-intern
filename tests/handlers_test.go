@@ -4,30 +4,31 @@ import (
 	"bytes"
 	"encoding/json"
 	"testing"
-	//"fmt"
 	. "github.com/de-tolkac/ozon-fintech-intern/controllers"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
-	//. "github.com/de-tolkac/ozon-fintech-intern/config"
 )
 
 var router *gin.Engine
 var codeToUrl map[string]string
 
+// Object to store JSON from POST /encode
 type responseEncode struct {
 	Code       int    `json:"code"`
 	EncodedUrl string `json:"encodedUrl"`
 	Err        string `json:"error"`
 }
 
+// Object to store JSON from GET /:short-url
 type responseDecode struct {
 	Code       int    `json:"code"`
 	DecodedUrl string `json:"decodedUrl"`
 	Err        string `json:"error"`
 }
 
+// Test object for generating short URL
 type encodeTest struct {
 	Req          []byte // In JSON format
 	Url          string
@@ -35,6 +36,7 @@ type encodeTest struct {
 	Res          responseEncode
 }
 
+// Test object for finding long url by short
 type decodeTest struct {
 	Req          []byte // In JSON format
 	Url          string
@@ -43,6 +45,7 @@ type decodeTest struct {
 }
 
 func createRouter() {
+	// If global config file wasn't previously generated
 	if !ConfigInited {
 		InitConfig()
 	}
@@ -53,6 +56,7 @@ func createRouter() {
 }
 
 func TestEncode(t *testing.T) {
+	// Call it only once in first test
 	createRouter()
 
 	var errorsTests = []encodeTest{
@@ -103,6 +107,7 @@ func TestEncode(t *testing.T) {
 	}
 
 	/*
+	// This test disabled because we don't need to truncate trailing slashes
 	var sameUrlTests = []encodeTest{
 		{[]byte(`{"url" : "http://ya.ru/"}`), "http://ya.ru", 200, responseEncode{0, "", ""}},
 		{[]byte(`{"url" : "http://ya.ru////"}`), "http://ya.ru", 200, responseEncode{0, "", ""}},

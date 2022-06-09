@@ -14,15 +14,15 @@ func Decode(cfg *Config) gin.HandlerFunc {
 		if !found {
 			c.JSON(http.StatusOK, gin.H{
 				"decodedUrl": "",
-				"code":       1,
+				"code":       1, // Url not found in DB
 				"error":      "Url not found",
 			})
 			return
 		}
-
+		
 		c.JSON(http.StatusOK, gin.H{
 			"decodedUrl": decodedUrl,
-			"code":       0,
+			"code":       0, // Success
 			"error":      "",
 		})
 	}

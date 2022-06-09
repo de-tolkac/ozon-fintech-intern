@@ -13,14 +13,17 @@ type Config struct {
 	UrlPrefix string
 }
 
+// Init config object
 func (cfg *Config) Init(envPath string) {
 	err := godotenv.Load(envPath)
 	if err != nil {
 		panic("Missed .env file")
 	}
 
+	// This prefix is concatenated with the short URL code
 	cfg.UrlPrefix = os.Getenv("API_URL_PREFIX")
 
+	// Parse command-line arguments
 	storageType := flag.String("db", "postgresql", "Default: postgresql, HastTable-based: hash")
 	flag.Parse()
 
@@ -32,6 +35,7 @@ func (cfg *Config) Init(envPath string) {
 		panic("Unknown storage type: " + *storageType + " (expected 'hash' or 'postgresql')")
 	}
 
+	// Init database object
 	err = cfg.Storage.Init()
 	if err != nil {
 		panic("Error connecting and configuring the database: " + err.Error())
